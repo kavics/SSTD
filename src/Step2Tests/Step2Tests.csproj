@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AC88E766-B02E-412B-8E8F-57D8FA3ABF45}</ProjectGuid>
+    <ProjectGuid>{0D373655-FC71-49A3-90FA-B3272D18896C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Step2Tests</RootNamespace>
@@ -48,8 +48,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SupplierTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SupplierTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
