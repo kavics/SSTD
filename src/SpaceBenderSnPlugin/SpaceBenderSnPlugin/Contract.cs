@@ -5,6 +5,7 @@ using System;
 
 namespace SpaceBenderSnPlugin
 {
+    [ContentHandler]
     public class Contract : GenericContent
     {
         public Contract(Node parent) : this(parent, null) { }
@@ -44,6 +45,16 @@ namespace SpaceBenderSnPlugin
             set
             {
                 ValidateContactPhone(value);
+
+                // remove +36 or 06 prefix.
+                if (value.StartsWith("+36"))
+                    value = value.Substring(3);
+                else
+                    value = value.Substring(2);
+
+                // remove separators.
+                value = value.Replace(" ", "").Replace("-", "");
+
                 base.SetProperty(ContactPhoneProperty, value);
             }
         }
@@ -101,7 +112,27 @@ namespace SpaceBenderSnPlugin
         }
         private void ValidateContactPhone(string value)
         {
-            throw new NotImplementedException();
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
+
+            if (value.StartsWith("+36"))
+                value = value.Substring(3);
+            else if (value.StartsWith("06"))
+                value = value.Substring(2);
+            else
+                throw new ArgumentException("Phone number must start with '+36' or '06'");
+
+            value = value.Replace(" ", "").Replace("-", "");
+
+            foreach (var c in value)
+                if (!Char.IsNumber(c))
+                    throw new ArgumentException("Phone number can contain numbers and '-' or ' ' as separator.");
+
+            var expectedLength = "201234567".Length;
+            if (value.Length < expectedLength)
+                throw new ArgumentException("Phone number is too short");
+            if (value.Length > expectedLength)
+                throw new ArgumentException("Phone number is too long");
         }
         private void Validate()
         {
