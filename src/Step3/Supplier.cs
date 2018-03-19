@@ -11,11 +11,7 @@ namespace Step3
             get => _contactName;
             set
             {
-                if(value == null)
-                    throw new ArgumentNullException(ContactName);
-                if(value.Length == 0)
-                    throw new ArgumentException("ContactName cannot be empty.");
-
+                ValidateName(value);
                 _contactName = value;
             }
         }
@@ -26,11 +22,7 @@ namespace Step3
             get => _contactEmail;
             set
             {
-                if(value == null)
-                    throw new ArgumentNullException(ContactEmail);
-                if (value.Length == 0)
-                    throw new ArgumentException("ContactEmail cannot be empty.");
-
+                ValidateEmail(value);
                 _contactEmail = value;
             }
         }
@@ -39,32 +31,66 @@ namespace Step3
         public string ContactPhone
         {
             get => _contactPhone;
-            set
+            set => _contactPhone = GetValidPhone(value);
+        }
+
+        public string Validate()
+        {
+            try
             {
-                if (value == null)
-                    throw new ArgumentNullException(ContactEmail);
-                if (value.Length == 0)
-                    throw new ArgumentException("ContactPhone cannot be empty.");
-
-                if (value.StartsWith("+36"))
-                    value = value.Substring(3);
-                else if (value.StartsWith("06"))
-                    value = value.Substring(2);
-                else
-                    throw new ArgumentException("ContactPhone must start with '+36' or '06'.");
-
-                value = value.Replace("-", "").Replace(" ", "");
-                if(value.Any(c=>!char.IsNumber(c)))
-                    throw new ArgumentException("ContactPhone accepts '-' or ' ' characters as separator.");
-
-                var expectedLentgth = "201234567".Length;
-                if (value.Length < expectedLentgth)
-                    throw new ArgumentException("ContactPhone is too short.");
-                if (value.Length > expectedLentgth)
-                    throw new ArgumentException("ContactPhone is too long.");
-
-                _contactPhone = value;
+                ValidateName(ContactName);
+                ValidateEmail(ContactEmail);
+                GetValidPhone(ContactPhone);
+                return null;
             }
+            catch(Exception e)
+            {
+                // suppressed
+                return e.Message;
+            }
+        }
+
+        private void ValidateName(string value)
+        {
+            if (value == null)
+                throw new ArgumentNullException(ContactName);
+            if (value.Length == 0)
+                throw new ArgumentException("ContactName cannot be empty.");
+        }
+
+        private void ValidateEmail(string value)
+        {
+            if (value == null)
+                throw new ArgumentNullException(ContactEmail);
+            if (value.Length == 0)
+                throw new ArgumentException("ContactEmail cannot be empty.");
+        }
+
+        private string GetValidPhone(string value)
+        {
+            if (value == null)
+                throw new ArgumentNullException(ContactEmail);
+            if (value.Length == 0)
+                throw new ArgumentException("ContactPhone cannot be empty.");
+
+            if (value.StartsWith("+36"))
+                value = value.Substring(3);
+            else if (value.StartsWith("06"))
+                value = value.Substring(2);
+            else
+                throw new ArgumentException("ContactPhone must start with '+36' or '06'.");
+
+            value = value.Replace("-", "").Replace(" ", "");
+            if (value.Any(c => !char.IsNumber(c)))
+                throw new ArgumentException("ContactPhone accepts '-' or ' ' characters as separator.");
+
+            var expectedLentgth = "201234567".Length;
+            if (value.Length < expectedLentgth)
+                throw new ArgumentException("ContactPhone is too short.");
+            if (value.Length > expectedLentgth)
+                throw new ArgumentException("ContactPhone is too long.");
+
+            return "+36" + value;
         }
     }
 }

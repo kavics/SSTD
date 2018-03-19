@@ -9,69 +9,69 @@ namespace Step3Tests
     {
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Supplier_ContactName_Null()
+        public void Supplier3_ContactName_Null()
         {
             var supplier = new Supplier();
             supplier.ContactName = null;
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void Supplier_ContactName_Empty()
+        public void Supplier3_ContactName_Empty()
         {
             var supplier = new Supplier();
             supplier.ContactName = string.Empty;
         }
 
+
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Supplier_ContactEmail_Null()
+        public void Supplier3_ContactEmail_Null()
         {
             var supplier = new Supplier();
             supplier.ContactEmail = null;
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void Supplier_ContactEmail_Empty()
+        public void Supplier3_ContactEmail_Empty()
         {
             var supplier = new Supplier();
             supplier.ContactEmail = string.Empty;
         }
 
+
         [TestMethod]
-        public void Supplier_Phone_Valid()
+        public void Supplier3_Phone_Valid()
         {
             var supplier = new Supplier();
 
             supplier.ContactPhone = "+36 20 123 45 67";
-            Assert.AreEqual("201234567", supplier.ContactPhone);
+            Assert.AreEqual("+36201234567", supplier.ContactPhone);
 
             supplier.ContactPhone = "06 20 123 45 67";
-            Assert.AreEqual("201234567", supplier.ContactPhone);
+            Assert.AreEqual("+36201234567", supplier.ContactPhone);
 
             supplier.ContactPhone = "06-20-123-45-67";
-            Assert.AreEqual("201234567", supplier.ContactPhone);
+            Assert.AreEqual("+36201234567", supplier.ContactPhone);
 
             supplier.ContactPhone = "06-20  123-4567";
-            Assert.AreEqual("201234567", supplier.ContactPhone);
+            Assert.AreEqual("+36201234567", supplier.ContactPhone);
         }
-
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Supplier_Phone_Invalid_Null()
+        public void Supplier3_Phone_Invalid_Null()
         {
             var supplier = new Supplier();
             supplier.ContactPhone = null;
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void Supplier_Phone_Invalid_Empty()
+        public void Supplier3_Phone_Invalid_Empty()
         {
             var supplier = new Supplier();
             supplier.ContactPhone = string.Empty;
         }
-
         [TestMethod]
-        public void Supplier_Phone_Invalid_Prefix()
+        public void Supplier3_Phone_WrongPrefix()
         {
             try
             {
@@ -85,7 +85,7 @@ namespace Step3Tests
             }
         }
         [TestMethod]
-        public void Supplier_Phone_Invalid_Separator()
+        public void Supplier3_Phone_WrongSeparator()
         {
             try
             {
@@ -98,7 +98,7 @@ namespace Step3Tests
             }
         }
         [TestMethod]
-        public void Supplier_Phone_Invalid_TooShort1()
+        public void Supplier3_Phone_TooShort1()
         {
             try
             {
@@ -111,7 +111,7 @@ namespace Step3Tests
             }
         }
         [TestMethod]
-        public void Supplier_Phone_Invalid_TooShort2()
+        public void Supplier3_Phone_TooShort2()
         {
             try
             {
@@ -124,7 +124,7 @@ namespace Step3Tests
             }
         }
         [TestMethod]
-        public void Supplier_Phone_Invalid_TooLong()
+        public void Supplier3_Phone_TooLong()
         {
             try
             {
@@ -135,6 +135,53 @@ namespace Step3Tests
             {
                 Assert.IsTrue(e.Message.Contains("too long"));
             }
+        }
+
+
+        [TestMethod]
+        public void Supplier3_NoName()
+        {
+            var supplier = new Supplier
+            {
+                ContactEmail = "supplier1@host.hu",
+                ContactPhone = "06 20 123 4567"
+            };
+
+            Assert.AreNotEqual(null, supplier.Validate());
+        }
+        [TestMethod]
+        public void Supplier3_NoMail()
+        {
+            var supplier = new Supplier
+            {
+                ContactEmail = "supplier1@host.hu",
+                ContactPhone = "06 20 123 4567"
+            };
+
+            Assert.AreNotEqual(null, supplier.Validate());
+        }
+        [TestMethod]
+        public void Supplier3_NoPhone()
+        {
+            var supplier = new Supplier
+            {
+                ContactEmail = "supplier1@host.hu",
+                ContactPhone = "06 20 123 4567"
+            };
+
+            Assert.AreNotEqual(null, supplier.Validate());
+        }
+        [TestMethod]
+        public void Supplier3_Valid()
+        {
+            var supplier = new Supplier
+            {
+                ContactName = "supplier1",
+                ContactEmail = "supplier1@host.hu",
+                ContactPhone = "06 20 123 4567"
+            };
+
+            Assert.AreEqual(null, supplier.Validate());
         }
 
     }
