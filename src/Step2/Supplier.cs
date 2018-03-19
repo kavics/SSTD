@@ -12,9 +12,9 @@ namespace Step2
             set
             {
                 if(value == null)
-                    throw new ArgumentNullException(ContactName);
+                    throw new ArgumentNullException(nameof(ContactName));
                 if(value.Length == 0)
-                    throw new ArgumentException("ContactName cannot be empty.");
+                    throw new ArgumentException($"{nameof(ContactName)} cannot be empty.");
 
                 _contactName = value;
             }
@@ -27,9 +27,9 @@ namespace Step2
             set
             {
                 if(value == null)
-                    throw new ArgumentNullException(ContactEmail);
+                    throw new ArgumentNullException(nameof(ContactEmail));
                 if (value.Length == 0)
-                    throw new ArgumentException("ContactEmail cannot be empty.");
+                    throw new ArgumentException($"{nameof(ContactEmail)} cannot be empty.");
 
                 _contactEmail = value;
             }
@@ -42,26 +42,25 @@ namespace Step2
             set
             {
                 if (value == null)
-                    throw new ArgumentNullException(ContactEmail);
+                    throw new ArgumentNullException(nameof(ContactPhone));
                 if (value.Length == 0)
-                    throw new ArgumentException("ContactPhone cannot be empty.");
+                    throw new ArgumentException($"{nameof(ContactPhone)} cannot be empty.");
 
                 if (value.StartsWith("+36"))
                     value = value.Substring(3);
                 else if (value.StartsWith("06"))
                     value = value.Substring(2);
                 else
-                    throw new ArgumentException("ContactPhone must start with '+36' or '06'.");
+                    throw new ArgumentException($"{nameof(ContactPhone)} must start with '+36' or '06'.");
 
                 value = value.Replace("-", "").Replace(" ", "");
                 if(value.Any(c=>!char.IsNumber(c)))
-                    throw new ArgumentException("ContactPhone accepts '-' or ' ' characters as separator.");
+                    throw new ArgumentException($"{nameof(ContactPhone)} accepts '-' or ' ' characters as separator.");
 
-                var expectedLentgth = "201234567".Length;
-                if (value.Length < expectedLentgth)
-                    throw new ArgumentException("ContactPhone is too short.");
-                if (value.Length > expectedLentgth)
-                    throw new ArgumentException("ContactPhone is too long.");
+                if (value.Length < 9)
+                    throw new ArgumentException($"{nameof(ContactPhone)} is too short.");
+                if (value.Length > 9)
+                    throw new ArgumentException($"{nameof(ContactPhone)} is too long.");
 
                 _contactPhone = value;
             }
