@@ -1,0 +1,11 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<ContentType name = 'Supplier' parentType='GenericContent' handler='SpaceBender.SnPlugin.Contract' xmlns='http://schemas.sensenet.com/SenseNet/ContentRepository/ContentTypeDefinition'>
+  <DisplayName>Beszállító</DisplayName>
+  <Description>Beszállító magyar kontakt személlyel.</Description>
+  <Icon>Application</Icon>
+  <Fields>
+    <Field name = 'ContactName' type='ShortText' />
+    <Field name = 'ContactEmail' type='ShortText' />
+    <Field name = 'ContactPhone' type='ShortText' />
+  </Fields>
+</ContentType>
