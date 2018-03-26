@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net.Mail;
 using SenseNet.ContentRepository;
 using SenseNet.ContentRepository.Schema;
 using SenseNet.ContentRepository.Storage;
@@ -110,6 +111,7 @@ namespace Step4
                 throw new ArgumentNullException(nameof(ContactEmail));
             if (value.Length == 0)
                 throw new ArgumentException($"{nameof(ContactEmail)} cannot be empty.");
+            var m = new MailAddress(value);
         }
         private static string GetValidPhone(string value)
         {
