@@ -114,7 +114,7 @@
       <HintPath>..\packages\SenseNet.Preview.7.0.0\lib\net451\SenseNet.Preview.dll</HintPath>
     </Reference>
     <Reference Include="SenseNet.Search, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SenseNet.Services.7.1.0\lib\net451\SenseNet.Search.dll</HintPath>
+      <HintPath>..\packages\SenseNet.Search.1.0.0\lib\net451\SenseNet.Search.dll</HintPath>
     </Reference>
     <Reference Include="SenseNet.Security, Version=2.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SenseNet.Security.2.3.1\lib\net45\SenseNet.Security.dll</HintPath>
@@ -130,6 +130,9 @@
     </Reference>
     <Reference Include="SenseNet.TaskManagement.Core, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SenseNet.TaskManagement.Core.1.1.0.0\lib\net45\SenseNet.TaskManagement.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="SenseNet.Tests, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SenseNet.Tests.1.0.0\lib\net452\SenseNet.Tests.dll</HintPath>
     </Reference>
     <Reference Include="SenseNet.TokenAuthentication, Version=7.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SenseNet.Services.7.1.0\lib\net451\SenseNet.TokenAuthentication.dll</HintPath>
@@ -151,13 +154,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SnRelated\SenseNetTests\SenseNetTests.csproj">
-      <Project>{5D8AAA7A-286B-4252-B059-D3BF10C04967}</Project>
-      <Name>SenseNetTests</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Step4\Step4.csproj">
       <Project>{B3E217F9-54F4-46CC-B268-C9B96F44D09F}</Project>
       <Name>Step4</Name>
