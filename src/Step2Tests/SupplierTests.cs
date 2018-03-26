@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Step2;
 
@@ -37,6 +36,13 @@ namespace Step2Tests
         {
             var supplier = new Supplier();
             supplier.ContactEmail = string.Empty;
+        }
+        [TestMethod]
+        [ExpectedException(typeof(FormatException))]
+        public void Supplier2_ContactEmail_Invalid()
+        {
+            var supplier = new Supplier();
+            supplier.ContactEmail = "@";
         }
 
 
