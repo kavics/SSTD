@@ -36,6 +36,12 @@ namespace Step4Tests
         {
             ValidateSupplierEmail(string.Empty);
         }
+        [TestMethod]
+        [ExpectedException(typeof(FormatException))]
+        public void Supplier3_ContactEmail_Invalid()
+        {
+            ValidateSupplierEmail("@");
+        }
 
 
         [TestMethod]

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net.Mail;
 
 namespace Step2
 {
@@ -30,6 +31,7 @@ namespace Step2
                     throw new ArgumentNullException(nameof(ContactEmail));
                 if (value.Length == 0)
                     throw new ArgumentException($"{nameof(ContactEmail)} cannot be empty.");
+                var m = new MailAddress(value);
 
                 _contactEmail = value;
             }

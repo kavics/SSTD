@@ -37,6 +37,13 @@ namespace Step3Tests
             var supplier = new Supplier();
             supplier.ContactEmail = string.Empty;
         }
+        [TestMethod]
+        [ExpectedException(typeof(FormatException))]
+        public void Supplier3_ContactEmail_Invalid()
+        {
+            var supplier = new Supplier();
+            supplier.ContactEmail = "@";
+        }
 
 
         [TestMethod]
