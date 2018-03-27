@@ -9,14 +9,14 @@ namespace Step2Tests
     {
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Supplier2_ContactName_Null()
+        public void Supplier_ContactName_Null()
         {
             var supplier = new Supplier();
             supplier.ContactName = null;
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void Supplier2_ContactName_Empty()
+        public void Supplier_ContactName_Empty()
         {
             var supplier = new Supplier();
             supplier.ContactName = string.Empty;
@@ -25,21 +25,21 @@ namespace Step2Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Supplier2_ContactEmail_Null()
+        public void Supplier_ContactEmail_Null()
         {
             var supplier = new Supplier();
             supplier.ContactEmail = null;
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void Supplier2_ContactEmail_Empty()
+        public void Supplier_ContactEmail_Empty()
         {
             var supplier = new Supplier();
             supplier.ContactEmail = string.Empty;
         }
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
-        public void Supplier2_ContactEmail_Invalid()
+        public void Supplier_ContactEmail_Invalid()
         {
             var supplier = new Supplier();
             supplier.ContactEmail = "@";
@@ -47,7 +47,7 @@ namespace Step2Tests
 
 
         [TestMethod]
-        public void Supplier2_Phone_Valid()
+        public void Supplier_ContactPhone_Valid()
         {
             var supplier = new Supplier();
 
@@ -65,20 +65,20 @@ namespace Step2Tests
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Supplier2_Phone_Invalid_Null()
+        public void Supplier_ContactPhone_Invalid_Null()
         {
             var supplier = new Supplier();
             supplier.ContactPhone = null;
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void Supplier2_Phone_Invalid_Empty()
+        public void Supplier_ContactPhone_Invalid_Empty()
         {
             var supplier = new Supplier();
             supplier.ContactPhone = string.Empty;
         }
         [TestMethod]
-        public void Supplier2_Phone_WrongPrefix()
+        public void Supplier_ContactPhone_WrongPrefix()
         {
             try
             {
@@ -92,7 +92,7 @@ namespace Step2Tests
             }
         }
         [TestMethod]
-        public void Supplier2_Phone_WrongSeparator()
+        public void Supplier_ContactPhone_WrongSeparator()
         {
             try
             {
@@ -105,7 +105,7 @@ namespace Step2Tests
             }
         }
         [TestMethod]
-        public void Supplier2_Phone_TooShort1()
+        public void Supplier_ContactPhone_TooShort1()
         {
             try
             {
@@ -118,7 +118,7 @@ namespace Step2Tests
             }
         }
         [TestMethod]
-        public void Supplier2_Phone_TooShort2()
+        public void Supplier_ContactPhone_TooShort2()
         {
             try
             {
@@ -131,7 +131,7 @@ namespace Step2Tests
             }
         }
         [TestMethod]
-        public void Supplier2_Phone_TooLong()
+        public void Supplier_ContactPhone_TooLong()
         {
             try
             {

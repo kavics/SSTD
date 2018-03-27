@@ -8,17 +8,17 @@ using Step4;
 namespace Step4Tests
 {
     [TestClass]
-    public class SupplierTests : TestBase
+    public class SupplierTests
     {
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Supplier4_ContactName_Null()
+        public void Supplier_ContactName_Null()
         {
             ValidateSupplierName(null);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void Supplier4_ContactName_Empty()
+        public void Supplier_ContactName_Empty()
         {
             ValidateSupplierName(string.Empty);
         }
@@ -26,26 +26,26 @@ namespace Step4Tests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Supplier4_ContactEmail_Null()
+        public void Supplier_ContactEmail_Null()
         {
             ValidateSupplierEmail(null);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void Supplier4_ContactEmail_Empty()
+        public void Supplier_ContactEmail_Empty()
         {
             ValidateSupplierEmail(string.Empty);
         }
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
-        public void Supplier3_ContactEmail_Invalid()
+        public void Supplier_ContactEmail_Invalid()
         {
             ValidateSupplierEmail("@");
         }
 
 
         [TestMethod]
-        public void Supplier4_Phone_Valid()
+        public void Supplier_ContactPhone_Valid()
         {
             Assert.AreEqual("+36201234567", GetValidSupplierPhone("+36 20 123 45 67"));
             Assert.AreEqual("+36201234567", GetValidSupplierPhone("06 20 123 45 67"));
@@ -54,18 +54,18 @@ namespace Step4Tests
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void Supplier4_Phone_Invalid_Null()
+        public void Supplier_ContactPhone_Invalid_Null()
         {
             GetValidSupplierPhone(null);
         }
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void Supplier4_Phone_Invalid_Empty()
+        public void Supplier_ContactPhone_Invalid_Empty()
         {
             GetValidSupplierPhone(string.Empty);
         }
         [TestMethod]
-        public void Supplier4_Phone_WrongPrefix()
+        public void Supplier_ContactPhone_WrongPrefix()
         {
             try
             {
@@ -79,7 +79,7 @@ namespace Step4Tests
             }
         }
         [TestMethod]
-        public void Supplier4_Phone_WrongSeparator()
+        public void Supplier_ContactPhone_WrongSeparator()
         {
             try
             {
@@ -92,7 +92,7 @@ namespace Step4Tests
             }
         }
         [TestMethod]
-        public void Supplier4_Phone_TooShort1()
+        public void Supplier_ContactPhone_TooShort1()
         {
             try
             {
@@ -105,7 +105,7 @@ namespace Step4Tests
             }
         }
         [TestMethod]
-        public void Supplier4_Phone_TooShort2()
+        public void Supplier_ContactPhone_TooShort2()
         {
             try
             {
@@ -118,7 +118,7 @@ namespace Step4Tests
             }
         }
         [TestMethod]
-        public void Supplier4_Phone_TooLong()
+        public void Supplier_ContactPhone_TooLong()
         {
             try
             {
@@ -129,75 +129,6 @@ namespace Step4Tests
             {
                 Assert.IsTrue(e.Message.Contains("too long"));
             }
-        }
-
-
-        [TestMethod]
-        public void Supplier4_NoName()
-        {
-            Test(() =>
-            {
-                InstallSupplierContentType();
-
-                var supplier = new Supplier(Repository.Root)
-                {
-                    ContactEmail = "supplier1@host.hu",
-                    ContactPhone = "06 20 123 4567"
-                };
-
-                Assert.AreNotEqual(null, supplier.Validate());
-            });
-        }
-        [TestMethod]
-        public void Supplier4_NoMail()
-        {
-            Test(() =>
-            {
-                InstallSupplierContentType();
-
-                var supplier = new Supplier(Repository.Root)
-                {
-                    ContactEmail = "supplier1@host.hu",
-                    ContactPhone = "06 20 123 4567"
-                };
-
-                Assert.AreNotEqual(null, supplier.Validate());
-            });
-        }
-
-        [TestMethod]
-        public void Supplier4_NoPhone()
-        {
-            Test(() =>
-            {
-                InstallSupplierContentType();
-
-                var supplier = new Supplier(Repository.Root)
-                {
-                    ContactEmail = "supplier1@host.hu",
-                    ContactPhone = "06 20 123 4567"
-                };
-
-                Assert.AreNotEqual(null, supplier.Validate());
-            });
-        }
-
-        [TestMethod]
-        public void Supplier4_Valid()
-        {
-            Test(() =>
-            {
-                InstallSupplierContentType();
-
-                var supplier = new Supplier(Repository.Root)
-                {
-                    ContactName = "supplier1",
-                    ContactEmail = "supplier1@host.hu",
-                    ContactPhone = "06 20 123 4567"
-                };
-
-                Assert.AreEqual(null, supplier.Validate());
-            });
         }
 
         /* ================================================================= Tools */
@@ -237,21 +168,6 @@ namespace Step4Tests
             {
                 throw (e.InnerException ?? e);
             }
-        }
-
-        private void InstallSupplierContentType()
-        {
-            ContentTypeInstaller.InstallContentType(@"<?xml version='1.0' encoding='utf-8'?>
-<ContentType name = 'Supplier' parentType='GenericContent' handler='Step4.Supplier' xmlns='http://schemas.sensenet.com/SenseNet/ContentRepository/ContentTypeDefinition'>
-  <DisplayName>Beszállító</DisplayName>
-  <Description>Beszállító magyar kontakt személlyel.</Description>
-  <Icon>Application</Icon>
-  <Fields>
-    <Field name = 'ContactName' type='ShortText' />
-    <Field name = 'ContactEmail' type='ShortText' />
-    <Field name = 'ContactPhone' type='ShortText' />
-  </Fields>
-</ContentType>");
         }
     }
 }
