@@ -78,9 +78,10 @@ namespace Step4
 
         public override void Save(NodeSaveSettings settings)
         {
-            Validate();
+            var msg = Validate();
+            if (msg != null)
+                throw new InvalidContentException(msg);
             base.Save(settings);
-
         }
 
         internal string Validate()
